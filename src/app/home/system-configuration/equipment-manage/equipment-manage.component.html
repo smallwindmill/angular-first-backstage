@@ -1,0 +1,217 @@
+
+<div class="content user-con col-md-12" >
+  <div class="row">
+    <div class="normalHeader col-md-12">
+        <div class="hpanel">
+          <div class="header-contain panel-body">
+            <div class="col-md-3">
+                <h2 class="h2">设备管理</h2>
+                <div><a id="newEquipment" class="square" (click)="newEquipment($event)">新建设备</a></div>
+            </div>
+            <div class="col-md-9">
+              <div class="">
+                  <div class="col-md-6">
+
+                  </div>
+                  <div class="col-md-6">
+                    <!-- <div class="select clearfix form-inline">
+                      <span class="fa fa-search pull-right"></span>
+                      <input type="" name="" placeholder="搜索成员" class="pull-right input-sm form-control">
+                    </div> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+
+        </div>
+        <div class="panel-body">
+          <table class="footable table table-stripped toggle-arrow-tiny default breakpoint footable-loaded table-hover" data-filter="#filter" data-page-size="8" id="example1">
+            <thead>
+              <tr>
+               <!--  <th><label><input type="checkbox" name="" id="all"><span>全选</span></label>
+               <em>&nbsp;</em>
+               <label><input type="checkbox" name="" id="other">反选</label></th> -->
+               <!-- <th></th> -->
+               <th>序号</th>
+               <th>设备码</th>
+               <th>设备名称</th>
+               <th>设备地址</th>
+               <th>创建人</th>
+               <th>创建日期</th>
+               <th>操作</th>
+               <!--  <th class="">
+                 <select name="" id="newAdd">
+                   <option id="newPart">新增成员</option>
+                 </select>
+                 <select name="" id="action">
+                   <option>操作</option>
+                   <option id="deleteEquipments">删除</option>
+                   <option>编辑</option>
+                   <option>移动</option>
+                 </select>
+               </th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let equipment of equipments;let i =index;">
+                <td  class="footable-visible footable-first-column">
+                <!-- *ngIf="userShow" -->
+                  {{i+1}}
+                </td>
+                <td class="footable-visible">
+                 <span>{{equipment.deviceSN}}</span>
+                </td>
+                <td class="footable-visible">
+                  {{equipment.name}}
+                </td>
+                <td class="footable-visible">
+                  {{equipment.address}}
+                </td>
+                <td class="footable-visible">
+                  {{equipment.creatorName}}
+                </td>
+                <td class="footable-visible">
+                  {{equipment.createDate.split(' ')[0]}}
+                </td>
+                <td class="footable-visible footable-last-column">
+                  <a data-id="{{equipment.id}}" href="javascript:;" (click)="moreEquipmentInfo($event)">详情</a>
+                  <a  data-id="{{equipment.id}}" href="javascript:void(0);" (click)="deleteEquipment($event)">删除</a><!-- *ngIf="userShow" -->
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="">
+                <td class="footable-visible" colspan="5">
+                  <ul class="pagination pull-right" >
+                    <li class="footable-page-arrow">
+                      <a data-page="first" (click)="firstPage($event)">«</a>
+                    </li>
+                    <li class="footable-page-arrow">
+                      <a data-page="prev" (click)="prevPage($event)">‹</a>
+                    </li>
+                     <li class="footable-page" *ngFor="let page of pages"  [ngClass]="{'active':page==1}" >
+                      <a (click)="changePage($event);">{{page}}</a>
+                    </li>
+                    <li class="footable-page-arrow">
+                      <a data-page="next" (click)="nextPage($event)">›</a>
+                    </li>
+                    <li class="footable-page-arrow">
+                      <a data-page="last" (click)="lastPage($event)">»</a>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">操作</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="changeBtn"></label>
+          <input type="text" class="form-control" id="changeBtn" placeholder="子部门名称">
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+        <button type="button" id="upload" class="btn btn-info">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 增加子菜单弹框 -->
+
+<div class="modal fade" id="myModal-Equipment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">操作</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group clearfix">
+            <label for="changeBtn">设备码</label>
+            <input type="text" class="form-control" id="equipmentSN" placeholder="">
+            <div class="showRed text-danger"></div>
+        </div>
+        <div class="form-group clearfix">
+            <label for="changeBtn">设备名称</label>
+            <input type="text" class="form-control" id="equipmentName" placeholder="">
+            <div class="showRed text-danger"></div>
+        </div>
+        <div class="form-group clearfix">
+            <label for="changeBtn">放置地址</label>
+            <input type="text" class="form-control" id="equipmentAddress" placeholder="">
+            <div class="showRed text-danger"></div>
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="shouldHide()" data-dismiss="modal">关闭</button>
+        <button type="button" id="upload" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 增加设备 -->
+
+<div class="modal fade" id="myModal-moreEquipmentInfo" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+        <button type="button" class="edit pull-right glyphicon glyphicon-pencil" id="edit" (click)="edit($event)"><span class=""></span></button>
+        <button type="button" class="pull-right" data-dismiss="modal" aria-label="Close" (click)="shouldHide()"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">操作</h4>
+      </div>
+      <div class="modal-body">
+      <form id="equipmentInfo">
+        <div class="form-group">
+            <label for="changeBtn">设备码</label>
+            <input type="text" class="form-control" id="equipmentSN" placeholder="">
+            <div class="showRed text-danger"></div>
+        </div>
+        <div class="form-group clearfix">
+            <label for="changeBtn">设备名称</label>
+            <input type="text" class="form-control" id="equipmentName" placeholder="">
+            <div class="showRed text-danger"></div>
+        </div>
+        <div class="form-group clearfix">
+            <label for="changeBtn">放置地址</label>
+            <input type="text" class="form-control" id="equipmentAddress" placeholder="">
+            <div class="showRed text-danger"></div>
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-success" data-dismiss="modal" (click)="shouldHide()">确定</button>
+        <button type="button" id="upload" class="btn btn-primary hide" (click)="changeEquipmentUpload($event)">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 查看设备信息 -->
+<script type="text/javascript">
+
+</script>

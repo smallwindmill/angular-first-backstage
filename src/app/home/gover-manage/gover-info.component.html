@@ -1,0 +1,140 @@
+<div class="content animate-panel" id="{{pid}}">
+  <div class="row">
+    <div class="normalHeader col-md-12">
+        <div class="hpanel">
+          <div class="header-contain panel-body">
+            <div class="col-md-2">
+              <div class="part">
+                  <h1 class="font-light m-b-xs h3">
+                      {{name}}
+                  </h1>
+                   <div id="mangePart" *ngIf="userShow" class="btn btn-info" (click)="manageClass($event)">管理</div>
+                  <div id="addContent" *ngIf="userShow" class="btn btn-info" (click)="addClass()">添加</div>
+                  <small></small>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="type">
+                  <div class="btn btn-info"><span>全部</span></div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="clearfix act text-right" id="publish">
+                  <a routerLink="/home/newinfo/{{pid}}" class=" " *ngIf="userShow"><span class="btn btn-info"><i class="fa fa-pencil-square-o"></i>发文章</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+
+        </div>
+        <div class="panel-body">
+          <table id="example1" class="footable table table-stripped toggle-arrow-tiny default breakpoint footable-loaded goverArc" data-page-size="8" data-filter="#filter">
+            <thead>
+              <tr>
+                <th class="">序号</th>
+                <th class="">标题</th>
+                <th class="">内容</th>
+                <th class="">发布人</th>
+                <th class="">发布时间</th>
+                <th class="">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of list;let i =index;" id={{item.id}}>
+               <td class="footable-visible footable-first-column">
+                 {{(i+1)}}
+               </td>
+               <td class="footable-visible footable-first-column">
+                 <span>{{item.title}}</span>
+               </td>
+               <td class="footable-visible">
+                 <span [innerHtml]="item.content.replace('<br>','')"></span>
+               </td>
+               <td class="footable-visible">
+                 {{item.creatorName}}
+               </td>
+               <td class="footable-visible">
+                {{item.createTime.split(' ')[0]}}
+               </td>
+               <td class="footable-visible footable-last-column">
+                 <a href="javascript:;" (click)="moreArcticInfo($event)">详情</a>
+                 <a href="javascript:;" *ngIf="userShow" class="deleteArctic" (click)="deleteArctic($event)">删除</a>
+               </td>
+             </tr>
+            </tbody>
+            <tfoot>
+              <tr class="">
+                <td class="footable-visible" colspan="6">
+                    <ul class="pagination pull-right" >
+                      <li class="footable-page-arrow">
+                        <a data-page="first" (click)="firstPage($event)">«</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="prev" (click)="prevPage($event)">‹</a>
+                      </li>
+                       <li class="footable-page" *ngFor="let page of pages"  [ngClass]="{'active':page==1}" >
+                        <a (click)="changePage($event);" id="{{page}}">{{page}}</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="next" (click)="nextPage($event)">›</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="last" (click)="lastPage($event)">»</a>
+                      </li>
+                    </ul>
+                  </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade modal-addClass" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">添加分类</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="changeBtn">名称</label>
+          <input type="text" class="form-control" id="title" placeholder="">
+          <div class="showRed text-danger"></div>
+        </div>
+        <div class="form-group icon_img_1">
+           <label  for="icon">图片</label>
+           <input name="file" class="file" type="file"  id="icon">
+            <div class="pre-img"></div>
+            <div class="message">
+              <p>温馨提示：图片尺寸建议为：900*525，图片小于4M</p>
+            </div>
+         </div>
+        <!-- <div class="form-group">
+          <label for="changeBtn">标题</label>
+          <input type="text" class="form-control" id="changeBtn" placeholder="">
+        </div> -->
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="shouldHide()" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="upload">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 添加标签 -->
+
+<script type="text/javascript">
+
+</script>

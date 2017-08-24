@@ -1,0 +1,190 @@
+<aside id="menu">
+    <div id="navigation">
+    <div _ngcontent-c3="" class="profile-picture">
+              <a _ngcontent-c3="">
+                 <!-- <img _ngcontent-c3="" alt="logo" class="img-circle m-b" src="../../../assets/img/u=770703659,2092882544&amp;fm=26&amp;gp=0.jpg" style="width: 80px;height: 80px;"> -->
+                 <img _ngcontent-c3="" alt="logo" class="img-circle m-b" src="{{imgSrc}}" style="width: 80px;height: 80px;">
+              </a>
+              <div _ngcontent-c3="" class="stats-label text-color">
+                  <span _ngcontent-c3="" class="font-extra-bold font-uppercase">{{admin}}</span>
+
+                  <div _ngcontent-c3="" class="dropdown" *ngIf="userShow">
+                     <a _ngcontent-c3="" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                       <small _ngcontent-c3="" class="text-muted"> <b _ngcontent-c3="" class="caret"></b></small>
+                     </a>
+                     <ul _ngcontent-c3="" class="dropdown-menu animated flipInX m-t-xs text-center">
+                       <li _ngcontent-c3=""><a _ngcontent-c3="" routerLink="/login">切换账号</a></li>
+                       <!-- <li _ngcontent-c3=""><a routerLink="/forgetpwd">忘记密码</a></li> -->
+                       <li _ngcontent-c3=""><a _ngcontent-c3="" id="changePwd" (click)="changePwd($event)">修改密码</a></li>
+                       <li _ngcontent-c3="" class="divider"></li>
+                       <li _ngcontent-c3=""><a _ngcontent-c3="" routerLink="/login"  href="/login">退出</a></li>
+                     </ul>
+                  </div>
+                  <div _ngcontent-c3="" class="small-chart m-t-sm" id="sparkline1">
+                  <!--  <canvas _ngcontent-c3="" height="30" style="display: inline-block; width: 119px; height: 30px; vertical-align: top;" width="119"></canvas> -->
+                  </div>
+                  <div _ngcontent-c3="">
+                     <!-- <h4 _ngcontent-c3="" class="font-extra-bold m-b-xs">{{accountNo}}</h4> -->
+                     <small _ngcontent-c3="" class="text-muted">{{accountClass}}</small>
+                  </div>
+                  <!-- <div _ngcontent-c3="" class="small-chart m-t-sm" id="sparkline1">
+                    <h3>当前:<span class="text-success">{{communityName}}</span></h3>
+                  </div> -->
+              </div>
+    </div>
+    <ul id="side-menu" class="nav nav-Leftmenu">
+    	<!-- <li>
+        <a routerLink="/home/index">
+          <span class="nav-label">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span>
+        </a>
+      </li> -->
+      <li *ngIf="communityShow==1">
+        <a routerLink="/home/communityManage">
+          <span class="nav-label">社区管理</span>
+        </a>
+      </li>
+    	<!-- <li [ngClass]="{'hide':communityShow!=2}"  class="">
+    		<a href="javascript:;" aria-expanded="false">
+          <a routerLink="/home/message">社区概况</a>
+    			<span class="nav-label">社区概况</span>
+    			<span class="fa arrow"></span>
+    		</a>
+    		<ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px">
+    		<li>
+          <a routerLink="/home/news">
+            <span class="nav-label">新闻</span>
+            <span class="label label-primary pull-right">new</span>
+          </a>
+        </li>
+    			<li>
+    				<a routerLink="/home/message">通知</a>
+    			</li>
+    		</ul>
+    	</li>-->
+    	<li [ngClass]="{'hide':communityShow!=2}"  class="">
+    		<a href="javascript:;" aria-expanded="false" class="active">
+          <a routerLink="/home/goverInfo/{{three}}">政务告知</a>
+    			<!-- <span class="nav-label">政务管理</span> -->
+    		</a>
+    		<!-- <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px">
+          <li>
+            <a routerLink="/home/goverInfo/{{three}}">政务告知</a>
+          </li>
+                  <li>
+                    <a routerLink="/home/goverWait">待办事项</a>
+                    <a routerLink="/home/goverInfo/{{3}}">待办事项</a>
+                  </li>
+        </ul> -->
+    	</li>
+      <li [ngClass]="{'hide':communityShow!=2}"  class="">
+        <a href="javascript:;" aria-expanded="false">
+          <a routerLink="/home/goverWait">待办事项</a>
+        </a>
+      </li>
+    	<li [ngClass]="{'hide':communityShow!=2}"  class="">
+    		<a href="javascript:;" aria-expanded="false">
+          <a routerLink="/home/goverBuild/{{four}}">党建管理</a>
+    		</a>
+    	</li>
+    	<li [ngClass]="{'hide':communityShow!=2}"  class="">
+        <!-- <a href="javascript:viod(0);" aria-expanded="false">
+           <span class="nav-label">管理</span>
+           <span class="fa arrow"></span>
+               </a> -->
+        <a href="javascript:viod(0);" routerLink="/home/haveResident" aria-expanded="false">
+          <span class="nav-label">辖区管理</span>
+         </a>
+         <!--  <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px">
+           <li>
+             <a routerLink="/home/haveResident" aria-expanded="false">
+               <span class="nav-label">辖区管理</span>
+               <span class="fa arrow"></span>
+             </a>
+           </li>
+         </ul> -->
+    	</li>
+      <li [ngClass]="{'hide':communityShow!=2}"  class="">
+        <a href="javascript:;" aria-expanded="false">
+          <span class="nav-label">便民服务</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px">
+          <li>
+            <a routerLink="/home/convenientAdvice/{{five}}">便民咨询</a>
+            <!-- <a routerLink="/home/goverInfo/{{five}}">便民咨询</a> -->
+          </li>
+          <li>
+            <a routerLink="/home/convenientLife/{{six}}">便民生活</a>
+            <!-- <a routerLink="/home/goverInfo/{{six}}">便民生活</a> -->
+          </li>
+          <li>
+              <a routerLink="/home/eHome/{{seven}}">社区e家园</a>
+              <!-- <a routerLink="/home/goverInfo/{{7}}">社区e家园</a> -->
+          </li>
+        </ul>
+      </li>
+      <li [ngClass]="{'hide':communityShow!=2}" class="">
+          <a href="javascript:viod(0);" aria-expanded="false">
+              <span class="nav-label">系统配置</span>
+              <span class="fa arrow"></span>
+          </a>
+          <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px">
+              <li>
+                <a routerLink="/home/goverDeal">政务办理</a>
+              </li>
+              <li>
+                <a routerLink="/home/eleBoard" ng-reflect-router-link="/home/eleBoard">电子屏</a>
+              </li>
+                <!-- <li>
+                    <a>界面管理</a>
+                    <ul>
+                    </ul>
+                </li> -->
+              <li>
+                  <a routerLink="/home/equipmentManage">设备管理</a>
+              </li>
+              <li>
+                <a routerLink="/home/manager" aria-expanded="false">
+                  <span class="nav-label">管理员</span>
+                  <!-- <span class="fa arrow"></span> -->
+                </a>
+              </li>
+          </ul>
+      </li>
+    </ul>
+    </div>
+</aside>
+
+<div class="modal fade" id="myModal-changePwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="edit pull-right" id="edit" (click)="edit($event)"><span class="glyphicon glyphicon-pencil"></span></button> -->
+        <button type="button" class="pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove" (click)="shouldHide()"></span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn"></h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+              <label for="changeBtn">原密码:</label>
+              <input type="text" class="form-control" id="oldPwd" placeholder="">
+              <div class="showRed text-danger"></div>
+          </div>
+          <div class="form-group">
+              <label class="">新密码:</label>
+              <input type="password" class="form-control" id="pwd">
+              <div class="showRed text-danger"></div>
+            </div>
+            <div class="form-group clearfix">
+                <label for="changeBtn">重复密码: </label>
+                <input type="password" class="form-control" id="rePwd" placeholder="">
+                <div class="showRed text-danger"></div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="upload2" class="btn btn-primary" (click)="changePwdUpload($event)">提交</button>
+      </div>
+    </div>
+  </div>
+</div>

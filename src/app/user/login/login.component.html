@@ -1,0 +1,31 @@
+<title>党员职工智慧管理教育平台-登录</title>
+<div id="body-contain">
+<div class="colorBar"></div>
+
+  <div class="login">
+      <div class="message">社区管理-管理登录</div>
+      <div id="darkbannerwrap"></div>
+
+      <form>
+    		<input id="name" class="form-control" name="action" value="login" type="hidden">
+    		<input name="username" id="account" placeholder="用户名" required type="text">
+    		  <hr class="hr15">
+    		<input name="password" id="password" placeholder="密码" required type="password" (keyup.enter)="onKeyLogin()">
+    		  <hr class="hr15">
+    		<input value="登录" style="width:100%;"  type="button" (click)="login()">
+  		    <hr class="hr20">
+        <div class="clearfix">
+          <div class="col-md-1"></div>
+          <div class="col-md-5 "></div>
+          <div class="col-md-5 text-right"><a routerLink="/forgetpwd">忘记密码</a></div>
+          <!-- <div class="col-md-5 text-right"><a routerLink='/forgetPassword'>修改密码</a></div> -->
+          <div class="col-md-1"></div>
+        </div>
+  	</form>
+
+
+  </div>
+
+  <div class="copyright">© 2017<a href=" " target="_blank">&nbsp;顺势为</a></div>
+ </div>
+<!-- <img [src]="yzmSrc"/> -->

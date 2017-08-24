@@ -1,0 +1,63 @@
+<!-- <div class="col-md-6"><p>找回密码</p></div>
+<div class="col-md-6"><p>修改密码</p></div>
+<div class="col-md-6"><a href="javascript:;" routerLink="/login">返回登录</a></div> -->
+<title>社区-忘记密码</title>
+<div id="body-contain">
+<div class="colorBar"></div>
+
+  <div class="login">
+      <div class="message">社区管理-忘记密码</div>
+      <div id="darkbannerwrap"></div>
+
+    <div class="form-com">
+      <div class="first">
+        <input id="name" class="form-control" name="action" value="login" type="hidden">
+        <div class="form-group form-group-lg">
+          <input name="username" id="account" class="form-control" placeholder="邮箱" required type="text">
+            <hr class="hr15">
+            <button id="getVerifi" (click) ="getVerifi($event)">获取验证码</button>
+        </div>
+        <div class="form-group form-group-lg">
+          <input name="text" id="code" class="form-control" placeholder="验证码" required type="text" (keyup)="code($event)">
+            <hr class="hr15">
+        </div>
+      </div>
+      <div class="two">
+        <input id="name" class="form-control" name="action" value="login" type="hidden">
+        <div class="form-group form-group-lg">
+          <input name="username" id="password" class="form-control" placeholder="新密码" required type="password">
+            <hr class="hr15">
+        </div>
+        <div class="form-group form-group-lg">
+          <input name="password" id="re-password" class="form-control" placeholder="再次填写新密码" required type="password">
+            <hr class="hr15">
+        </div>
+      </div>
+      <!-- <div class="three">
+        <input id="name" class="form-control" name="action" value="login" type="hidden">
+        <div class="form-group form-group-lg">
+          <input name="username" id="account" class="form-control" placeholder="手机号" required type="text">
+            <hr class="hr15">
+        </div>
+        <div class="form-group form-group-lg">
+          <input name="password" id="password" class="form-control" placeholder="验证码" required type="password">
+            <hr class="hr15">
+        </div>
+      </div> -->
+        <input id="certain" value="验证" style="width:100%;" type="button" (click)="verificationCode($event)">
+          <hr class="hr20">
+        <div class="clearfix">
+          <div class="col-md-1"></div>
+          <div class="col-md-5 "><a routerLink="/login">返回登录</a></div>
+          <div class="col-md-1"></div>
+        </div>
+    </div>
+       <!--  <a href="javascript:void(0)" class="text-danger" (click)="forgetpwd()">忘记密码</a>
+       <a href="javascript:void(0)" class="text-primary" (click)="verificationCode()">验证码登录</a> -->
+
+
+  </div>
+
+  <div class="copyright">© 2017 <a href=" " target="_blank">&nbsp;顺势为</a></div>
+ </div>
+<!-- <img [src]="yzmSrc"/> -->

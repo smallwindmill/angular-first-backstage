@@ -1,0 +1,4 @@
+img{width: 100%;}
+.carousel-control.left{background-image: none;}
+.carousel-control.right{background-image: none;}
+.carousel-inner > .item{max-height: 451px;overflow: hidden;}

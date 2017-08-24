@@ -1,0 +1,216 @@
+<div class="content animate-panel">
+  <div class="row">
+    <div class="normalHeader col-md-12">
+        <div class="hpanel">
+          <div class="header-contain panel-body">
+            <div class="col-md-2">
+              <div class="part">
+                  <h1 class="font-light m-b-xs h3">
+                      政务待办
+                  </h1>
+                   <div id="mangePart" *ngIf="userShow" class="btn btn-info" (click)="manageClass($event)">管理</div>
+                  <div id="addContent" *ngIf="userShow" class="btn btn-info" (click)="addClass()">添加</div>
+                  <small></small>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="type">
+                  <div class="btn btn-info" (click)="getAllClass()"><span>全部</span></div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="clearfix act text-right" id="publish">
+                  <!-- <a routerLink="/home/newinfo/{{pid}}" class=" " *ngIf="userShow"><span class="btn btn-info"><i class="fa fa-pencil-square-o"></i>发文章</span></a> -->
+              </div>
+            </div>
+          </div>
+           <div class="header-contain panel-body">
+            <div class="col-md-4">
+              <div class="status">
+                  <div class="btn  btn-info" (click)="getAllClass()">全部</div>
+                  <div id="1" class="status_btn btn">已完成</div>
+                  <div id="0" class="status_btn btn">待审核</div>
+
+              </div>
+            </div>
+
+            <div class="col-md-4">
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+
+        </div>
+        <div class="panel-body">
+          <table id="example1" class="footable table table-stripped toggle-arrow-tiny default breakpoint footable-loaded" data-page-size="8" data-filter="#filter">
+            <thead>
+              <tr>
+                <th class="">序号</th>
+                <th class="">申请人</th>
+                <th class="">申请分类</th>
+                <th class="">申请时间</th>
+                <th class="">状态</th>
+                <th class="">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of list;let i=index;" id="{{item.id}}">
+                <td class="footable-visible footable-first-column">
+                  {{(i+1)}}
+                </td>
+                <td class="footable-visible">
+                  {{item.name}}
+                </td>
+                 <td class="footable-visible">
+                  {{item.businessName}}
+                </td>
+                <td class="footable-visible">
+                 {{item.createTime.split(' ')[0]}}
+                </td>
+                <td>
+                  <a id={{item.id}} title="{{item.status}}" [ngClass]='{"hide":item.status!=1}' href="javascript:;" id="checked" (click)="checkedPop($event)">已审核</a>
+                  <a id={{item.id}} title="{{item.status}}" [ngClass]='{"hide":item.status!=0}' href="javascript:;" id="waitChecked" (click)="checkedPop($event)">待审核</a>
+                </td>
+                <td class="footable-visible footable-last-column">
+                  <a id={{item.id}} title="{{item.status}}" (click)="morePopInfo($event)" href="javascript:;">详情</a>
+                  <a id={{item.id}} title="{{item.status}}" *ngIf="userShow" href="javascript:;" id="test" (click)="deletePop($event)">删除</a>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="">
+                <td class="footable-visible" colspan="5">
+                    <ul class="pagination pull-right" >
+                      <li class="footable-page-arrow">
+                        <a data-page="first" (click)="firstPage($event)">«</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="prev" (click)="prevPage($event)">‹</a>
+                      </li>
+                       <li class="footable-page" *ngFor="let page of pages"  [ngClass]="{'active':page==1}" >
+                        <a (click)="changePage($event);">{{page}}</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="next" (click)="nextPage($event)">›</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="last" (click)="lastPage($event)">»</a>
+                      </li>
+                    </ul>
+                  </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">添加待办事项分类</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="changeBtn">标题</label>
+          <input type="text" class="form-control" id="title" placeholder="">
+        </div>
+        <!-- <div class="form-group">
+          <label for="changeBtn">标题</label>
+          <input type="text" class="form-control" id="changeBtn" placeholder="">
+        </div> -->
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="shouldHide()">关闭</button>
+        <button type="button" class="btn btn-primary" id="upload">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal-morePopInfo" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+        <!-- <button type="button" class="edit pull-right glyphicon glyphicon-pencil" id="edit" (click)="edit($event)"><span class=""></span></button> -->
+        <button type="button" class="pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">详情</h4>
+      </div>
+      <div class="modal-body">
+        <form id="populationUpload"  class="form-horizontal">
+         <!-- <form action="http://192.168.0.204:8095/web/addPopulationInformation" method="post"  id="defaultForm" class="form-horizontal"> -->
+          <div class="mod-input form-group mod-input-text mb10">
+            <label>姓名:</label>
+            <div class="" id="name" ></div>
+          </div>
+
+          <div class="mod-input form-group mod-input-text mb10">
+            <label>民族:</label>
+            <div class="" id="nation"></div>
+          </div>
+
+          <div class="form-header-3  form-group">
+            <label>性别：</label>
+            <div class="" id='sex'></div>
+
+          </div>
+
+          <div class="mod-input form-group mod-input-text mb10">
+            <label>出生日期:</label>
+            <div id="birthday"></div>
+          </div>
+
+          <div class="mod-input form-group mod-input-text mb10">
+            <label> 身份证号:</label>
+            <div id="cardNumber"></div>
+          </div>
+
+          <div class="mod-input form-group mod-input-text mb10">
+            <label>签发机关:</label>
+            <div id="office"></div>
+          </div>
+
+          <div class="mod-input form-group mod-input-text mb10">
+            <label>现住址:</label>
+            <div id="address"></div>
+          </div>
+
+         <!--  <div class="form-header-3 mb5">
+           <label>申请情况：</label>
+           <div id="applicationStatus"></div>
+         </div> -->
+
+
+          <div class="mod-input form-group mod-input-text mb10">
+            <label>联系电话:</label>
+            <div id="phoneNumber"></div>
+          </div>
+
+          <div class="form-header-3">
+            <label>身份证正反照：</label>
+            <div class="clearfix">
+              <div id="before" class="col-md-12 col-sm-12"><img src="" style="max-width:90%;margin-bottom:10px;" align="center"></div>
+              <div id="back" class="col-md-12 col-sm-12"><img src="" style="max-width:90%;margin-bottom:10px;" align="center"></div>
+            </div>
+          </div>
+
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-success" data-dismiss="modal">确定</button>
+    </div>
+  </div>
+</div>
+<!-- 查看待办事项详情 -->

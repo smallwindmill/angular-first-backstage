@@ -1,0 +1,77 @@
+#menu{
+  overflow-y: auto;
+  width: 180px;
+  position: absolute;
+  left: 0px;
+  top: 64px;
+  z-index: 2;
+  background: #fff;
+  transition: .5s;
+}
+
+  #menu.noScroll{
+  -webkit-transform: translate(-180px,0);
+     -moz-transform: translate(-180px,0);
+      -ms-transform: translate(-1800px,0);
+       -o-transform: translate(-180px,0);
+          transform: translate(-180px,0);
+  }
+  #side-menu li ul li a {
+    padding: 10px 10px 10px 30px;
+    color: #6a6c6f;
+    text-transform: none;
+    font-weight: 600;
+}
+
+@media (max-width: 768px){
+  #log{display: none;}
+  #wrapper{margin-left: 0;}
+  #menu{-webkit-transform: translate(-180px,0);
+     -moz-transform: translate(-180px,0);
+      -ms-transform: translate(-180px,0);
+       -o-transform: translate(-180px,0);
+            transform: translate(-180px,0);}
+  #menu.scroll{
+    -webkit-transform: translate(0px,0);
+       -moz-transform: translate(0px,0);
+        -ms-transform: translate(0px,0);
+         -o-transform: translate(0px,0);
+            transform: translate(0px,0);
+  }
+}
+#side-menu li ul li a {
+    display: block;
+}
+#side-menu li{
+  text-align: center;
+}
+
+.dropdown{
+  position: unset;display: inline-block;overflow: hidden;
+}
+.stats-label{
+  position: relative;
+}
+.dropdown-menu{
+  top: 20%;text-align: center;
+}
+.pull-right{
+    position: absolute;
+    right: 5%;
+}
+button.pull-right{
+  background: transparent;
+  border: none;
+}
+
+#side-menu li a.active{
+  background: #eaffff;
+}
+
+.form-group{
+  margin-bottom: 0;
+}
+.modal-dialog{
+  margin-top: 10%;
+}
+

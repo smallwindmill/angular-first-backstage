@@ -1,0 +1,334 @@
+<div class="content row">
+  <aside id="menu-user" class="col-md-2"   >
+      <div id="navigation">
+          <!-- <li data-id="null" title="null" (click)="getBasicId($event)"> -->
+          <div>
+            <h3 class="h3 nav-label">
+              <span class=""><i class="fa fa-menu"></i>组织架构</span><!-- <i class="fa fa-refresh" (click)="departmentsBasic();"></i> --><span (click)="addBasicDepar()" style="overflow: hidden;" title="添加基层部门"><i class="btn glyphicon glyphicon-plus"></i></span>
+            </h3>
+          </div>
+          <!-- </li> -->
+      <ul class="nav side-user" id="side-menu" >
+          <li data-id={{department.id}}  (click)="showListsOne($event);getId($event);showLists($event);" *ngFor="let department of departments" title="{{department.level}}">
+            <div class="place-background"></div>
+            <a>{{department.name}}
+              <!-- data-title="层级:{{department.level}}父级:{{department.parentLevel}}" -->
+            </a>
+            <ul>
+              <li data-id={{departOne.id}} (click)="showListsTwo($event);getId($event);showLists($event);"  *ngFor="let departOne of departmentsOne"  data-title='{{departOne.level}}'  [ngClass]="{'hide':departOne.parentId!=department.id}">
+                <div class="place-background"></div>
+                <a *ngIf="departOne.parentId==department.id">{{departOne.name}}</a>
+              <ul>
+                 <li data-id={{departTwo.id}} (click)="showListsThree($event);getId($event);showLists($event);" *ngFor="let departTwo of departmentsTwo"  data-title='{{departTwo.level}}' [ngClass]="{'hide':departTwo.parentId!=departOne.id}">
+                  <div class="place-background"></div>
+                   <a *ngIf="departTwo.parentId==departOne.id">{{departTwo.name}}</a>
+                     <ul>
+                       <li data-id={{departThree.id}} (click)="showListsFour($event);getId($event);showLists($event);" *ngFor="let departFour of departmentsFour"  data-title='{{departFour.level}} ' [ngClass]="{'hide':departFour.parentId!=departThree.id}">
+                        <div class="place-background"></div>
+                         <a *ngIf="departFour.parentId==departThree.id">{{departFour.name}}</a>
+                       </li>
+                     </ul>
+                 </li>
+               </ul>
+              </li>
+            </ul>
+          </li>
+      </ul>
+      </div>
+  </aside>
+
+  <div class="user-con col-md-10" >
+    <div class="row">
+      <div class="normalHeader col-md-12">
+          <div class="hpanel" style="margin-bottom: 0px;">
+            <div class="header-contain panel-body">
+              <div class="col-md-12">
+                  <h2 class="h2" id="partName">区名</h2>
+                  <div *ngIf="userShow"><a id="newClass" class="square" (click)="addDepartment($event)">新建子部门</a><span class="vertical">|</span><a id="changeName" class="square" (click)="updateDepartment($event)">修改</a><span class="vertical">|</span><a id="deleteClass" class="square" (click)="deleteDepartment($event)">删除</a></div>
+              </div>
+              <div class="col-md-9">
+                <div class="type">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+                      <!-- <div class="select clearfix form-inline">
+                        <span class="fa fa-search pull-right"></span>
+                        <input type="" name="" placeholder="搜索成员" class="pull-right input-sm form-control">
+                      </div> -->
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel" style="margin-bottom: 0px;">
+          <div class="panel-heading">
+            <div class="operate" style="margin-left: 0;"><!-- *ngIf="userShow!=0" -->
+               <a  id="newPart" (click)="newAdd($event)">新增</a><span class="vertical">|</span><a (click)="moveMember($event)">移动</a><span class="vertical">|</span><a id="deleteMembers">删除</a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <table class="footable table table-stripped toggle-arrow-tiny default breakpoint footable-loaded table-hover" data-filter="#filter" data-page-size="8" id="example1">
+              <thead>
+                <tr class="active">
+                  <th [ngClass]="{'show':userShow}"><label><input type="checkbox" name="" id="all"></label>
+                    <span id="countCon3">已选择</span>
+                  </th>
+                 <th>序号</th>
+                  <th class="">
+                   成员
+                  </th>
+                 <th>邮箱</th>
+                <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let member of members;let i=index;">
+                  <td *ngIf="userShow" class="footable-visible footable-first-column">
+                   <label><input type="checkbox" name="" data-id="{{member.accountid}}"></label>
+                  </td>
+                  <td class="footable-visible">
+                    {{i+1}}
+                  </td>
+                  <td class="footable-visible">
+                    <i  class="parter glyphicon glyphicon-user" [ngClass]="{'text-info':member.sex==1,'text-danger ':member.sex==0}"></i>
+                    <span>{{member.alias}}</span>
+                  </td>
+                  <td class="footable-visible">
+                    {{member.accountNo}}
+                  </td>
+                  <td class="footable-visible footable-last-column">
+                    <a data-id="{{member.accountid}}" href="javascript:;" (click)="moreMemberInfo($event)">详情</a>
+                    <a *ngIf="userShow" data-id="{{member.accountid}}" href="javascript:void(0);" (click)="deleteMember($event)">删除</a>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr class="">
+                  <td class="footable-visible" colspan="5">
+                    <ul class="pagination pull-right" >
+                      <li class="footable-page-arrow">
+                        <a data-page="first" (click)="firstPage($event)">«</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="prev" (click)="prevPage($event)">‹</a>
+                      </li>
+                       <li class="footable-page" *ngFor="let page of pages"  [ngClass]="{'active':page==1}" >
+                        <a (click)="changePage($event);">{{page}}</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="next" (click)="nextPage($event)">›</a>
+                      </li>
+                      <li class="footable-page-arrow">
+                        <a data-page="last" (click)="lastPage($event)">»</a>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">操作</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="changeBtn"></label>
+          <input type="text" class="form-control" id="changeBtn" placeholder="子部门名称">
+        </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">关闭</button>
+        <button type="button" id="upload" class="btn btn-info" >保存</button>
+      </div><!-- (click)="uploadDepart($event)" -->
+    </div>
+  </div>
+</div>
+<!-- 增加子菜单弹框 -->
+
+<div class="modal fade" id="myModal-member" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" (click)="shouldHide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">操作</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <div class="form">
+            <label for="changeBtn"></label>
+            <input type="text" class="form-control" id="name" placeholder="姓名">
+            <div class="showRed text-danger"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="btn-group" data-toggle="buttons">
+           <div class="btn bg-gray">性别：</div>
+            <label class="btn bg-lightgray active">
+              <input type="radio" name="sex" id="man" checked autocomplete="off" value="1"> 男
+            </label>
+            <label class="btn bg-lightgray">
+              <input type="radio" name="sex" id="woman" autocomplete="off" value="0"> 女
+            </label>
+          </div>
+        </div>
+        <div class="showRed text-danger"></div>
+        <div class="form-group clearfix">
+            <label for="changeBtn"></label>
+            <input type="text" class="form-control" id="account" placeholder="账号/邮箱">
+            <div class="showRed text-danger"></div>
+        </div>
+        <div class="form-group clearfix">
+            <label for="changeBtn"></label>
+            <input type="password" class="form-control" id="password" placeholder="密码">
+            <div class="showRed text-danger"></div>
+          </div>
+          <div class="form-group clearfix">
+            <label for="repeat-changeBtn"></label>
+            <input type="password" class="form-control" id="rePassword" placeholder="确认密码">
+            <div class="showRed text-danger"></div>
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="shouldHide()" data-dismiss="modal">关闭</button>
+        <button type="button" id="upload" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 增加成员 -->
+
+<div class="modal fade" id="myModal-moreMemberInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="edit pull-right glyphicon glyphicon-pencil" id="edit" (click)="edit($event)"><span class=""></span></button>
+        <button type="button" class="pull-right" data-dismiss="modal" aria-label="Close" (click)="shouldHide()"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">详情</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <div class="form">
+            <label for="changeBtn">姓名</label>
+            <input type="text" class="form-control" id="name" placeholder="">
+            <div class="showRed text-danger"></div>
+          </div>
+        </div>
+        <div id="sex" class="form-group">
+            <label>性别：</label>
+            <input type="text" name="" id="" class="form-control">
+        </div>
+        <div class="form-group" id="sex-choice">
+          <div class="btn-group" data-toggle="buttons">
+           <label class="btn bg-gray">性别：</label>
+            <label class="btn bg-lightgray active">
+              <input type="radio" name="sex" id="man" autocomplete="off" checked value="1"> 男
+            </label>
+            <label class="btn bg-lightgray">
+              <input type="radio" name="sex" id="woman" autocomplete="off" value="0"> 女
+            </label>
+          </div>
+        </div>
+        <div class="showRed text-danger"></div>
+        <div class="form-group clearfix">
+            <label for="account">账号/邮箱</label>
+            <input type="text" class="form-control" id="account" placeholder="">
+            <div class="showRed text-danger"></div>
+        </div>
+        <div class="form-group clearfix">
+          <label for="password">密码</label>
+          <input type="password" class="form-control" id="password" placeholder="">
+          <div class="showRed text-danger"></div>
+        </div>
+          <div class="form-group clearfix rePassword hide">
+           <label for="repeat-changeBtn"></label>
+           <input type="password" class="form-control" id="rePassword" placeholder="确认密码">
+           <div class="showRed text-danger"></div>
+         </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-primary" data-dismiss="modal" (click)="shouldHide()">确定</button>
+        <button type="button" id="upload" class="btn btn-primary hide" (click)="changeMemberUpload($event)">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 查看成员信息 -->
+
+<div class="modal fade" id="myModal-moveMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="edit pull-right" id="edit" (click)="edit($event)"><span class="glyphicon glyphicon-pencil"></span></button> -->
+        <div class="btn pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-close"></span></div>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">移动</h4>
+      </div>
+      <div class="modal-body clearfix">
+        <div class="col-md-6">
+          <div><p>请选择将要移入的子部门:</p></div>
+          <div class="part onebyone">
+
+            <ul class="nav side-user" id="side-menu" >
+              <li *ngFor="let department of departments">
+                <input type="checkbox" data-id={{department.id}} name=""><a data-id={{department.id}}  (click)="showListsOne($event);showLists($event);"  title="{{department.level}}">
+                  {{department.name}}
+                </a>
+                <ul>
+                  <li *ngFor="let departOne of departmentsOne"  [ngClass]="{'hide':departOne.parentId!=department.id}">
+                    <input type="checkbox" data-id={{departOne.id}} name=""><a *ngIf="departOne.parentId==department.id" data-id={{departOne.id}} (click)="showListsTwo($event);showLists($event);" data-title='{{departOne.level}}'>{{departOne.name}}</a>
+                  <ul>
+                     <li *ngFor="let departTwo of departmentsTwo" [ngClass]="{'hide':departTwo.parentId!=departOne.id}">
+                       <input type="checkbox" data-id={{departTwo.id}} name=""><a *ngIf="departTwo.parentId==departOne.id" data-id={{departTwo.id}} (click)="showListsThree($event);showLists($event);"  data-title='{{departTwo.level}}'>{{departTwo.name}}</a>
+                         <ul>
+                           <li *ngFor="let departFour of departmentsFour" [ngClass]="{'hide':departFour.parentId!=departThree.id}">
+                            <input type="checkbox" data-id={{departThree.id}} name=""><a data-id={{departThree.id}} (click)="showListsFour($event);showLists($event);"   data-title='{{departFour.level}} ' *ngIf="departFour.parentId==departThree.id"> {{departFour.name}}</a>
+                           </li>
+                         </ul>
+                     </li>
+                   </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+        <!-- <div class="col-md-6">
+        <div>请选择将要移入的子部门</div>
+
+        </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" (click)="shouldHide()" class="btn btn-sm btn-default" data-dismiss="modal">取消</button>
+        <button type="button" id="upload" class="btn btn-sm btn-primary" (click)="moveMemberUpload($event)">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 移动成员 -->
+
+
+<script type="text/javascript">
+
+</script>

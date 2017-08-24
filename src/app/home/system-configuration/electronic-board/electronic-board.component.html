@@ -1,0 +1,358 @@
+<div class="content animate-panel">
+  <div class="row">
+    <div class="normalHeader col-md-12">
+        <div class="hpanel">
+          <div class="header-contain panel-body">
+            <div class="col-md-1">
+              <div class="">
+                  <h2 class="font-light m-b-xs btn btn-lg">
+                      电子屏管理
+                  </h2>
+                  <small></small>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="">
+
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="" data-toggle="tooltip" data-placement="bottom" title="最多只能显示九条内容">
+                  <!-- <div id="mangePart" class="btn btn-lg btn-success">管理分类</div> -->
+                  <a *ngIf="userShow" (click)="addContent($event)" class="" id="addContent"><div class="btn btn-lg text-info"><i class="fa fa-pencil-square-o"></i>添加内容</div> <br></a>
+                  <!-- <div id="addContent" class="btn btn-lg btn-success">添加分类</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+    </div><!--
+    <div class="col-md-1"><span>分类</span></div>
+    <div class="col-md-11"></div> -->
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+
+        </div>
+        <div class="panel-body">
+          <table id="example1" class="footable table table-stripped toggle-arrow-tiny default breakpoint footable-loaded" data-page-size="8" data-filter="#filter">
+            <thead>
+              <tr>
+                <th class="">序号</th>
+                <th class="">显示名称</th>
+                <th class="">显示图标</th>
+                <th class="">介绍</th>
+                <th class="">适配模块</th>
+                <th class="">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let device of devices;let i = index;">
+                <td class="footable-visible footable-first-column">
+                  {{i+1}}
+                </td>
+                <td class="footable-visible">
+                  {{device.name}}
+                </td>
+                <td class="footable-visible td_img">
+                  <div class="img"><img src="{{device.picUrl}}"></div>
+                </td>
+                <td class="footable-visible">
+                  {{device.introduce}}
+                </td>
+                <td class="footable-visible">
+                  {{device.classificationName}}
+                </td>
+                <td class="footable-visible footable-last-column">
+                  <a id="{{device.id}}" href="javascript:;" (click)="moreEleContent($event)">详情</a>
+                  <a *ngIf="userShow" href="javascript:;" data-id={{device.id}} (click)="deleteContent($event)">删除</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="normalHeader col-md-12">
+        <div class="hpanel">
+          <div class="header-contain panel-body">
+            <div class="col-md-1">
+              <div class="">
+                  <h2 class="font-light m-b-xs btn btn-lg">
+                      视频管理
+                  </h2>
+              </div>
+            </div>
+            <div class="col-md-9"></div>
+            <div class="col-md-2">
+              <div class="video clearfix">
+                <div class="btn btn-lg text-info"  data-toggle="tooltip" data-placement="bottom" title="仅支持一个视频文件且为mp4格式" (click)="upLoadVideoOne($event)" >
+                  <i class="fa fa-upload" ></i>添加视频
+                  <input type="file" name="file" id="video-input" class="hide" (change)="upLoadVideo()" >
+                </div>
+              </div>
+            </div>
+
+              <table id="tableVideo" class="footable table table-stripped toggle-arrow-tiny default breakpoint footable-loaded" data-page-size="8" data-filter="#filter">
+                <!-- <thead>
+                  <tr>
+                    <th class="">序号</th>
+                    <th class="">显示名称</th>
+                    <th class="">显示图标</th>
+                    <th class="">介绍</th>
+                    <th class="">适配模块</th>
+                    <th class="">操作</th>
+                  </tr>
+                </thead> -->
+                <tbody>
+                  <tr>
+                    <td class="footable-visible footable-first-column">
+
+                    </td>
+                    <td class="footable-visible">
+                      {{videoName}}
+                    </td>
+                    <td class="footable-visible td_img">
+                      <!-- <img src="{{device.picUrl}}"> -->
+                    </td>
+                    <td class="footable-visible">
+                      <!-- {{video.introduce}} -->
+                    </td>
+                    <td class="footable-visible">
+                      <!-- {{video.templateId}} -->
+                    </td>
+                    <td  class="footable-visible footable-last-column">
+                      <!-- <a id="{{device.id}}" href="javascript:;" (click)="moreVideo($event)">详情</a> -->
+                      <a href="javascript:;" [ngClass]="{'hide':videoId==undefined}" data-id={{videoId}} (click)="deleteVideo($event)">删除</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="normalHeader col-md-12">
+        <div class="hpanel">
+          <div class="header-contain panel-body">
+            <div class="col-md-4">
+              <div class="">
+                  <h2 class="font-light m-b-xs btn btn-lg wechat">
+                      公众号管理
+                  </h2>
+                  <small></small>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="wechat">
+                <div id="weChatServer"><span>服务</span><div class="btn btn-sm"></div>&nbsp;<a href="http://112.124.15.205:8095/wechat/{{wechat[0].webAddress}}" target="_blank">http://112.124.15.205:8095/wechat/{{wechat[0].webAddress}}</a></div>
+                <div id="weChatLivelihood"><span>民生</span><div class="btn btn-sm"></div>&nbsp;<a href="http://112.124.15.205:8095/wechat/{{wechat[1].webAddress}}" target="_blank">http://112.124.15.205:8095/wechat/{{wechat[1].webAddress}}</a></div>
+              </div>
+            </div>
+            <!-- <div class="col-md-2">
+              <div class="video clearfix">
+                <div class="btn btn-lg text-info"><i class="fa fa-upload"></i>添加视频<input type="file" name="" id="video-input" ></div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">添加</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="changeBtn">标题</label>
+          <input type="text" class="form-control" id="title" placeholder="">
+        </div>
+        <!-- <div class="form-group">
+          <label for="changeBtn">标题</label>
+          <input type="text" class="form-control" id="changeBtn" placeholder="">
+        </div> -->
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="shouldHide()">关闭</button>
+        <button type="button" class="btn btn-primary" id="upload">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal-addContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">添加</h4>
+      </div>
+      <div class="modal-body">
+        <!-- <form id="eleContent"> -->
+          <div class="form-group">
+            <div class="form">
+              <label for="name">显示名称:</label>
+              <input type="text" class="form-control" name="name" id="name" placeholder="">
+              <div class="showRed text-danger"></div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-12">
+            <!-- <input type="file" class="layui-upload-file" name="file">
+            <input type="file" name="file" class="layui-upload-file">-->
+            <label  for="icon">图片:</label>
+            <input name="file" class="file" type="file"  id="icon">
+             <!-- <span class="ico"><i class="glyphicon glyphicon-upload"></i>上传图片</span> -->
+             <!-- <span class="layui-upload-icon"><i class="layui-icon"></i></span> -->
+             <div class="pre-img"></div>
+             <div class="message">
+               <p>温馨提示：图片尺寸建议为：900*525，图片小于4M</p>
+             </div>
+            <div class="showRed text-danger"></div>
+          </div>
+        <!-- </form> -->
+          <div class="form-group clearfix">
+              <label for="introduce">介绍:</label>
+              <input type="text" class="form-control" name="introduce" id="introduce" placeholder="">
+              <div class="showRed text-danger"></div>
+          </div>
+          <div class="clearfix">
+            <div class="form-group clearfix col-md-5">
+              <label for="moduleIdDad">适配模块（父类）:</label>
+              <!-- <input type="text" class="form-control" name='pid' id="pid" placeholder=""> -->
+              <select class="form-control" name='pid' id="pid"   (change)="findBusiness($event)">
+                <option *ngFor="let pid of pids" id="{{pid.id}}">{{pid.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="form-group clearfix col-md-5">
+              <label for="moduleIdSon">适配模块(分类):</label>
+              <select class="form-control" name='businessId' id="businessId">
+                <option id="zero">全部</option>
+                <option *ngFor="let bus of business" id="{{bus.id}}">{{bus.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="showRed text-danger"></div>
+          <div class="form-group clearfix">
+            <label for="moduleIdSon">适配模板:</label>
+            <div class="template_choice">
+              <div class="col-sm-6 col-md-6"><label><input type="radio" checked name="template" id="1"><img src="assets/img/template1.jpg"></label></div>
+              <div class="col-sm-6 col-md-6"><label><input type="radio" name="template" id="2"><img src="assets/img/template2.jpg"></label></div>
+              <div class="col-sm-6 col-md-6"><label><input type="radio" name="template" id="3"><img src="assets/img/template3.jpg"></label></div>
+              <div class="col-sm-6 col-md-6"><label><input type="radio" name="template" id="4"><img src="assets/img/template4.jpg"></label></div>
+            </div>
+        <!-- </form> -->
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="shouldHide()"  data-dismiss="modal">关闭</button>
+        <input type="button" id="upload" class="btn btn-primary" value="确定" (click)="UpLoadContent($event)">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 增加内容 -->
+
+<div class="modal fade" id="myModal-moreEleInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="edit pull-right glyphicon glyphicon-pencil" id="edit" (click)="edit($event)" title="编辑"><span class=""></span></button>
+        <button type="button" class="pull-right" data-dismiss="modal" aria-label="Close" (click)="shouldHide()"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">操作</h4>
+      </div>
+      <div class="modal-body">
+        <!-- <form  id="eleContent" action="http://192.168.0.204:8095/web/addContent" method="post"> -->
+        <!-- <form id="eleContent"> -->
+          <div class="form-group">
+            <div class="form">
+              <label class="leftText" for="name">显示名称:</label>
+              <input type="text" class="form-control" name="name" id="name" placeholder="">
+              <div class="showRed text-danger"></div>
+            </div>
+          </div>
+        <!-- <form  id="saveDataForm" action="http://192.168.0.204:8095/upload.do" method="post" (submit)> -->
+          <div class="form-group icon_img">
+             <label class="leftText" for="icon">显示图标：</label>
+             <!-- <input type="file" name="picId" id="picId" multiple="" (change)="fileChange($event)"> -->
+             <img src="" width="100">
+          </div>
+        <!-- </form> -->
+         <div class="form-group col-md-12 icon_img_1 hide">
+            <label  for="icon">图片:</label>
+            <input name="file" class="file" type="file"  id="icon">
+             <div class="pre-img"></div>
+             <div class="message">
+               <p>温馨提示：图片尺寸建议为：900*525，图片小于4M</p>
+             </div>
+             <div class="showRed text-danger"></div>
+          </div>
+          <div class="form-group clearfix">
+              <label class="leftText" for="introduce">介绍:</label>
+              <input type="text" class="form-control" name="introduce" id="introduce" placeholder="">
+              <div class="showRed text-danger"></div>
+          </div>
+          <div class="clearfix">
+            <div class="form-group clearfix col-md-5 hide" id="pidCon">
+              <label for="moduleIdDad">适配模块（父类）:</label>
+              <input type="text" class="form-control" name='pid' id="pid" placeholder="">
+              <select class="form-control hide" name='pid' id="pid_choice"  (change)="findBusiness($event)" >
+                <option *ngFor="let pid of pids" id="{{pid.id}}">{{pid.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="form-group clearfix col-md-5 hide" id="businessIdCon">
+              <label for="moduleIdSon">适配模块(分类):</label>
+              <input type="text" class="form-control" name='businessId' id="businessId" placeholder="">
+              <select class="form-control hide" name='businessId' id="businessId_choice">
+                <option id="zero">全部</option>
+                <option *ngFor="let bus of business" id="{{bus.id}}">{{bus.name}}</option>
+              </select>
+              <div class="showRed text-danger"></div>
+            </div>
+          </div>
+          <div class="form-group clearfix" id="classificationNameCon">
+            <label class="leftText" for="moduleIdSon">适配模块:</label>
+            <input type="text" class="form-control" id="classificationName">
+            <div class="showRed text-danger"></div>
+          </div>
+          <div class="form-group clearfix">
+            <label for="moduleIdSon">适配模板:</label>
+            <div class="template">
+              <img src="assets/img/template{{templateIdCon}}.jpg">
+            </div>
+            <div class="template_choice hide">
+              <div class="col-sm-6 col-md-6"><label><input type="radio" checked name="template" id="1"><img src="assets/img/template1.jpg"></label></div>
+              <div class="col-sm-6 col-md-6"><label><input type="radio" name="template" id="2"><img src="assets/img/template2.jpg"></label></div>
+              <div class="col-sm-6 col-md-6"><label><input type="radio" name="template" id="3"><img src="assets/img/template3.jpg"></label></div>
+              <div class="col-sm-6 col-md-6"><label><input type="radio" name="template" id="4"><img src="assets/img/template4.jpg"></label></div>
+            </div>
+            <div class="showRed text-danger"></div>
+          </div>
+        <!-- </form> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-success" data-dismiss="modal" (click)="shouldHide()">确定</button>
+        <button type="button" id="upload" class="btn btn-primary hide" (click)="changeEleUpload($event)">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 查看内容 -->
+

@@ -1,0 +1,187 @@
+
+
+<div class="content animate-panel">
+  <div class="row head">
+    <div class="col-md-12">
+     <div class="btn btn-success pull-right" (click)="newCommunity()">新建社区</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let com of communitys" id="{{com.community.communityid}}Con">
+      <div class="hpanel">
+      <div class="panel-tools clearfix">
+        <a href="javascript:void(0);" class="closebox pull-right" id="{{com.community.communityid}}" (click)="deleteCommunity($event)"><i class="fa fa-close"></i></a>
+
+        <a href="javascript:void(0);" class="editbox pull-right"  id="{{com.community.communityid}}" (click)="morecommunityInfo($event)"><i class="fa fa-edit"></i></a>
+      </div>
+        <div class="panel-body">
+          <div class="">
+            <h4 class="font-bold m-b-xs text-success">社区：{{com.community.communityName}}</h4>
+            <!-- <p class="font-bold text-success">社区管理员：{{com.areaFullName}}</p> -->
+            <p class="small">地址：{{com.areaFullName}}{{com.community.address}}</p>
+            <p class="small">
+              描述：{{com.community.description}}
+            </p>
+             <p class="small">
+              创建日期：{{com.community.createDate}}
+            </p>
+            <a class="btn btn-success btn-sm" routerLink="/home/goverInfo/3"  id="{{com.community.communityid}}" (click)="goCommunity($event)">进入</a><!--routerLink="/home/haveResident/{{com.community.communityid}}" href="/#/home/goverInfo/3" href="/home/goverInfo/3" -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="myModal-newCommunity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="edit pull-right" id="edit"><span class="glyphicon glyphicon-pencil"></span></button> -->
+        <button type="button" class="pull-right" data-dismiss="modal" aria-label="Close" (click)="shouldHide()"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">操作</h4>
+      </div>
+      <div class="modal-body">
+      <form id="newcommunityInfo">
+       <div class="form-group">
+           <label for="communityName">社区名称:</label>
+           <input type="text" class="form-control" id="communityName" name="communityName" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group col-md-5">
+           选择地区:<label for="changeBtn">省份:</label>
+           <select  class="form-control" (change)="getCity($event)">
+             <option *ngFor="let area of areas" id={{area.id}}>{{area.name}}</option>
+           </select>
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="col-md-2"></div>
+       <div class="form-group col-md-5">
+           <label for="changeBtn">城市:</label>
+           <select type="text" class="form-control" id="city" name="city" >
+             <option *ngFor="let city of cities" id={{city.id}}>{{city.name}}</option>
+           </select>
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group">
+           <label for="changeBtn">地址:</label>
+           <input type="text" class="form-control" id="address" name="address" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group">
+           <label for="changeBtn">描述:</label>
+           <input type="text" class="form-control" id="description" name="description" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group">
+           <label for="changeBtn">管理员账号/邮箱:</label>
+           <input type="text" class="form-control" id="accountNo" name="accountNo" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group">
+           <label for="changeBtn">密码:</label>
+           <input type="password" class="form-control" id="password" name="password" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group">
+           <label for="changeBtn">确认密码:</label>
+           <input type="password" class="form-control" id="rePassword" name="password" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group">
+           <label for="changeBtn">联系电话:</label>
+           <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group">
+           <label for="changeBtn">管理员姓名:</label>
+           <input type="text" class="form-control" id="alias" name="alias" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+       <div class="form-group">
+         <div class="btn-group" data-toggle="buttons">
+          <div class="btn bg-gray">管理员性别：</div>
+           <label class="btn bg-lightgray active">
+             <input type="radio" id="man" name="sex" autocomplete="off" checked value="0"> 男
+           </label>
+           <label class="btn bg-lightgray">
+             <input type="radio" id="woman" name="sex" autocomplete="off" value="1"> 女
+           </label>
+         </div>
+       </div>
+     </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-warning" data-dismiss="modal" (click)="shouldHide()">取消</button>
+        <button type="button" id="upload" class="btn btn-primary" >确定</button>
+        <!-- (click)="uploadCommunity($event)" -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 新建社区 -->
+
+
+<div class="modal fade" id="myModal-morecommunityInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="edit pull-right glyphicon glyphicon-pencil" id="edit" (click)="edit($event)" title="修改"><span class=""></span></button>
+        <button type="button" class="pull-right" data-dismiss="modal" aria-label="Close" (click)="shouldHide()" title="关闭"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+        <h4 class="modal-title" id="myModalLabel222" id="forBtn">详情</h4>
+      </div>
+      <div class="modal-body">
+      <form id="newcommunityInfo">
+       <div class="form-group">
+           <label for="communityName">社区名称:</label>
+           <input type="text" class="form-control" id="communityName" name="communityName" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+        <div class="form-group" id="address_con">
+           <label for="changeBtn">地区：</label>
+           <input  class="form-control" type="text" >
+           <div class="showRed text-danger"></div>
+       </div>
+
+       <!-- <div class="col-md-2"></div> -->
+       <div class="form-group clearfix hide" id="address_choice">
+          <div class="form-group col-md-5">
+              选择地区:<label for="changeBtn">省份:</label>
+              <select  class="form-control" (change)="getCity($event)">
+                <option *ngFor="let area of areas" id={{area.id}}>{{area.name}}</option>
+              </select>
+              <div class="showRed text-danger"></div>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="form-group col-md-5">
+              <label for="changeBtn">城市:</label>
+              <select type="text" class="form-control" id="city" name="city" >
+                <option *ngFor="let city of cities" id={{city.id}}>{{city.name}}</option>
+              </select>
+              <div class="showRed text-danger"></div>
+          </div>
+        <div class="form-group">
+            <label for="changeBtn">地址:</label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="">
+            <div class="showRed text-danger"></div>
+        </div>
+       </div>
+       <div class="form-group">
+           <label for="changeBtn">描述:</label>
+           <input type="text" class="form-control" id="description" name="description" placeholder="">
+           <div class="showRed text-danger"></div>
+       </div>
+     </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-success" data-dismiss="modal" (click)="shouldHide()">确定</button>
+        <button type="button" id="upload" class="btn btn-primary hide" (click)="changecommunityUpload($event)">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 社区详情 -->

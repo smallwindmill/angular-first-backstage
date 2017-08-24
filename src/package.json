@@ -1,0 +1,18 @@
+{
+  "main": "index.html",
+  "name": "Backstage",
+  "description": "Backstage app",
+  "version": "1.0.0",
+  "author": "littesmallwind",
+  "window": {
+    "icon":"index.ico",
+    "title": "Demo 2017",
+    "toolbar": true,
+    "resizablr": true,
+    "width": 1280,
+    "height": 900,
+    "min-width": 800,
+    "min-height": 500,
+    "frame": false
+  }
+}

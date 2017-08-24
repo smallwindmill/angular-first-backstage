@@ -1,0 +1,21 @@
+.hpanel .header-contain [class*='col-'] .status .btn{padding: 8px 16px;margin:10px 10px;}
+.hpanel .header-contain [class*='col-']{padding: 0;}
+.panel-tools{position: absolute;}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{text-align: center;}
+
+#myModal-morePopInfo form{width: 70%;margin: 0 auto;}
+#myModal-morePopInfo .form-group label+div{text-indent: 1em;}
+#myModal-morePopInfo .form-group{margin: 0 0 10px;}
+#myModal-morePopInfo .form-group label{width: 30%;display: inline-block;margin: 0;}
+#myModal-morePopInfo .form-group div{width: 65%;display: inline-block;margin: 0;}
+
+#populationUpload{line-height: 1.5;letter-spacing: 1px;}
+#populationUpload div[class*='col-md']{padding: 0;}
+
+button.pull-right{
+  background: transparent;
+  border: none;
+}
+.modal-dialog{
+  margin-top: 10%;
+}

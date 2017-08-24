@@ -1,0 +1,37 @@
+<nav class="navbar navbar-fixed-top">
+	<div class="color-line"></div>
+	<div id="header">
+		<div id="log">
+			<span><img src="../../../assets/img/logo.png" style="max-height: 100%"></span>
+		</div>
+		<div class="header-link hide-menu">
+			<i class="fa fa-bars"></i>
+		</div>
+		<div class="pull-right" style="margin-right: 100px;">
+	        <ul class="nav navbar-nav no-border">
+		        <!--<li class="dropdown">
+		          <a class="dropdown-toggle" href="#" data-toggle="dropdown" style="padding-top: 21px;">
+		            <i class="fa fa-user-circle-o">{{identity}}</i>
+		          </a>
+		        </li>-->
+		        <li class="dropdown">
+		          <a class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 21px;"><i [ngClass]="{'glyphicon glyphicon-user text-danger':sex==0,'glyphicon glyphicon-user text-info':sex==1}" aria-hidden="true"><span>{{admin}}</span></i></a>
+		        </li>
+		     <!--    <li class="dropdown" *ngIf="userShow">
+		       <a class="dropdown-toggle"  routerLink="/forgetpwd" data-toggle="dropdown" style="padding-top: 21px;"><span>[忘记密码]</span>
+		       </a>
+		     </li>-->
+		     <li class="dropdown" *ngIf="!userShow">
+		       <a class="dropdown-toggle" routerLink="/login" data-toggle="dropdown" style="padding-top: 21px;"><span>[登录]</span>
+		       </a>
+		     </li>
+		     <li class="dropdown" *ngIf="userShow">
+		       <a class="dropdown-toggle" routerLink="/login" data-toggle="dropdown" style="padding-top: 21px;" (click)="loginOut()"><span>[退出]</span></a>
+		     </li>
+		      <li class="dropdown" *ngIf="communityShow!=communityShowRep">
+		       <a class="dropdown-toggle" data-toggle="dropdown"  routerLink="/home/communityManage" style="padding-top: 21px;" (click)="goBackSuper($event)"><span>[返回]</span></a>
+		     	</li><!--  href="/home/communityManage"-->
+	        </ul>
+        </div>
+	</div>
+</nav>

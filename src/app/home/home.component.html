@@ -1,0 +1,5 @@
+<app-header *ngIf="superManager!=0"></app-header>
+<app-menu-aside *ngIf="superManager!=0"></app-menu-aside>
+<div id="wrapper" style="margin-left: 180px;padding-top: 68px;" *ngIf="superManager!=0">
+  <router-outlet></router-outlet>
+</div>

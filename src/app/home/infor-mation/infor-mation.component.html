@@ -1,0 +1,85 @@
+
+<div class="media">
+  <div class="media-left media-middle">
+  </div>
+  <div class="media-body moreArcInfo">
+      <div class="haeder clearfix">
+        <a href="javascript:void(0);" class="btn btn-lg" style="padding:20px;" (click)="goBack($event)" *ngIf=" tokenId!=undefined && tokenId!='' ">
+          <i class="fa fa-angle-left" style="font-size: 2em;" title="后退"></i><!-- <img class="media-object" src="../../../assets/img/5.jpg" alt="..."> -->
+        </a>
+        <h3 class="h3 media-heading" id="title"></h3>
+        <div class="col-md-6 info">
+          <div class="col-md-1 col-sm-1"></div>
+          <div class="col-md-3 col-sm-3 text-right type">分类标签:
+            <div class="label"></div>
+          </div>
+          <div class="col-md-3 col-sm-3">创建人:<span id="creator"><b></b></span></div>
+          <div class="col-md-5 col-sm-5" id="createtime"><i class="glyphicon glyphicon-time text-warning"></i>&nbsp;</div>
+        </div>
+        <div class="col-md-6 text-right">
+          <div class="col-md-10 col-sm-10">
+            <a (click)="editArc($event)" class="btn text-info" *ngIf="tokenId!=undefined && tokenId!='' "><span>编辑</span></a>
+            <!-- <a routerLink="/home/newinfo/{{actId}}" class="btn text-info"><span>编辑</span></a> -->
+          </div>
+          <div class="col-md-2 col-sm-2"></div>
+        </div>
+        <div>
+        <!--   <div class="col-md-3 id="createtime">
+          <div class="label"></div>
+        </div> -->
+        </div>
+      </div>
+      <div class="content clearfix">
+        <div class="con">
+          <div class="center-block" id="content"></div>
+        </div>
+      </div>
+  </div>
+
+  <div class="write-post-container hide">
+      <div class="row">
+          <div class="col-md-12">
+          </div>
+          <div class="col-sm-10 col-sm-offset-1" style="margin-bottom: 70px;">
+              <div class="label-con clearfix">
+                  <div class="col-md-2">
+                      <h4 class="h4" >
+                      <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="只能选择一个分类">添加分类</button></h4>
+                  </div>
+                  <div class="label-type col-md-10">
+                    <h4 class="h4"><a (click)="returnArc()" class="pull-right text-info btn">退出编辑</a></h4>
+                  </div>
+              </div>
+              <div class="line bg-primary"></div>
+              <div class="type">
+
+              </div><!--
+              <form role="form" method="post" action="http://192.168.0.204:8095/upload.do" enctype="multipart/form-data"> -->
+                  <div class="form-group col-md-12">
+                    <label>标题</label>
+                    <input type="text" class="form-control" id="title" placeholder="请输入新闻标题">
+                 </div>
+
+                  <div class="form-group up col-md-12">
+                    <label>图片</label>
+                    <input name="file" class="file" type="file" id="addfile">
+                     <div class="pre-img"></div>
+                     <div class="message">
+                       <p>温馨提示：图片尺寸建议为：900*525，图片小于4M</p>
+                     </div>
+                  </div>
+                  <div class="form-group col-md-12">
+                     <label>内容</label>
+                       <!-- <textarea id="demo" style="display: none;"></textarea> -->
+                       <div id="editCon" style="display: none;"></div>
+                 </div>
+              <!-- </form> -->
+              <div class="col-md-12">
+                  <button id="upload" class="btn btn-info pull-right" (click)="upLoad()">发布</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>
+
